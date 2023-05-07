@@ -1,0 +1,301 @@
+{
+    "info": {
+        "description": "API for Swing notes application",
+        "title": "Swing notes API",
+        "version": "1.0.0"
+    },
+    "openapi": "3.0.0",
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Note": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "text": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "date"
+                    },
+                    "modifiedAt": {
+                        "type": "date"
+                    },
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+
+    "paths": {
+        "/api/user/signup": {
+            "post": {
+                "description": null,
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                        
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Creates a new user"
+                    }
+                },
+                "summary": "Creates a new user"
+
+            }
+        },
+        "/api/user/login": {
+            "post": {
+                "description": null,
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                        
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Lets a user login"
+                    }
+                },
+                "summary": "Lets a user log in"
+
+            }
+        },
+        "/api/notes": {
+            "post": {
+                "description": null,
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "text": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                        
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Creates a note"
+                    }
+                },
+                "summary": "Creates a note"
+
+            },
+            "get": {
+                "description": null,
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "notes": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Note"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns notes"
+                    }
+                },
+                "summary": "Returns notes"
+            },
+            "put": {
+                "description": null,
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Note"
+                            }
+                        }
+                    }
+                        
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Modifies a note"
+                    }
+                },
+                "summary": "Modifies a note"
+            },
+            "delete": {
+                "description": null,
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "id": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                        
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Deletes a note"
+                    }
+                },
+                "summary": "Deletes a note"
+            }
+            
+        },
+        "/api/notes/search": {
+            "get": {
+                "description": null,
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                        
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "notes": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Note"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Searches for note by title"
+                    }
+                },
+                "summary": "Searches for note by title"  
+            }
+        }
+        
+
+    }
+
+}
